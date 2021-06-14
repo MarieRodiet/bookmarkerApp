@@ -1,9 +1,7 @@
-import { config } from "./config"
-
 class Bookmarker {
     constructor() {
         this.apiUrl = "https://opengraph.io/api/1.1/site";
-        this.appId = config.apiKey;
+        this.appId = "API_KEY HERE";
         this.$addButton = document.getElementById("addBtn");
 
         if (!localStorage["TASKS"]) {
@@ -27,10 +25,14 @@ class Bookmarker {
         }
         this.loadBookmarks();
 
+        this.$addButton.addEventListener("click", event => {
+            event.preventDefault();
+            this.addBookmarkClick();
+        })
+
     }
 
-    addBookmarkClick(event) {
-        event.preventDefault();
+    addBookmarkClick() {
         const urlForHref = document.getElementById("url").value;
         const url = encodeURIComponent(urlForHref);
         const description = document.getElementById("description").value;
